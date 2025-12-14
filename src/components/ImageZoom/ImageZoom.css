@@ -1,0 +1,119 @@
+/* ImageZoom.css и обновления для Content.css */
+
+/* Общие стили для зума */
+.internal_content {
+  margin: 1vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40vh;
+  height: 30vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: rgb(255, 255, 255);
+  border-radius: 20px;
+  position: relative;
+  transition: all 0.3s ease; /* Плавный переход для контейнера */
+}
+
+/* Зум: увеличиваем контейнер и изображение */
+.internal_content.zoomed {
+  width: 60vh; /* Увеличиваем контейнер */
+  height: 45vh; /* Пропорционально высоте */
+}
+
+/* Стили для изображения: применяем scale для реального увеличения фото */
+.lazy-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  transition: transform 0.3s ease; /* Плавный переход для scale */
+}
+
+.lazy-image.zoomed {
+  transform: scale(1.5); /* Увеличиваем изображение в 1.5 раза */
+  transform-origin: center; /* Центр увеличения */
+}
+
+/* Кнопки зума */
+.zoom-button {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.zoom-button:hover:not(:disabled) {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.zoom-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Темная тема */
+.Content.dark .zoom-button {
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.Content.dark .zoom-button:hover:not(:disabled) {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* Медиа-запросы для адаптивности */
+@media screen and (max-width: 768px) {
+  .internal_content {
+    width: 35vh;
+    height: 25vh;
+  }
+
+  .internal_content.zoomed {
+    width: 50vh; /* Меньше на мобильных */
+    height: 37.5vh;
+  }
+
+  .lazy-image.zoomed {
+    transform: scale(1.2); /* Меньше увеличение на мобильных */
+  }
+
+  .zoom-button {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .internal_content {
+    width: 40vh;
+    height: 30vh;
+  }
+
+  .internal_content.zoomed {
+    width: 55vh;
+    height: 41vh;
+  }
+
+  .lazy-image.zoomed {
+    transform: scale(1.4); /* Среднее увеличение на планшетах */
+  }
+
+  .zoom-button {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+}
+
+/* Остальные стили из вашего CSS остаются без изменений... */

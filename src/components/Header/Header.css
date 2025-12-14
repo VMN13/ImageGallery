@@ -1,0 +1,97 @@
+.Counter {
+  font-size: 18px; /* Уменьшен для лучшей читаемости */
+  margin: 0 10px; /* Добавлен отступ для разделения элементов */
+  color: inherit; /* Наследует цвет от родителя для видимости в обоих режимах */
+  font-weight: normal; /* Для лучшей читаемости */
+}
+
+
+
+.header.light {
+  display: flex;
+  justify-content: space-between; /* Изменено для равномерного распределения элементов */
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0 20px; /* Добавлен padding для предотвращения вылезания элементов */
+}
+
+
+.header.dark {
+  display: flex;
+  justify-content: space-between; /* Изменено для равномерного распределения элементов */
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0 20px; /* Добавлен padding для предотвращения вылезания элементов */
+  box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+-webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+-moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+}
+
+.Mode.light {
+  font-size: 16px; /* Уменьшен для компактности */
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 8px 12px; /* Увеличен padding для лучшего вида */
+  border-radius: 10px;
+  transition: 1s ease-in-out;
+  border: none; /* Добавлено для чистоты */
+}
+
+.Mode.dark {
+  border-radius: 10px;
+  padding: 8px 12px; /* Увеличен padding */
+  font-size: 16px; /* Уменьшен */
+  background-color: rgb(203, 203, 203);
+  font-weight: bold;
+  color: rgb(37, 37, 37);
+  cursor: pointer;
+  transition: 1s ease-in-out;
+  border: none; /* Добавлено */
+}
+
+.Header.light {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-size: 20px;
+  background-position: center;
+  color: rgb(0, 0, 0);
+}
+
+.Header.dark {
+  background: rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  background-position: center;
+  color: rgb(255, 255, 255);
+}
+
+.theme-toggle {
+  /* Этот класс не используется, можно удалить или оставить для будущего */
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.h1_header {
+  margin: 0; /* Убрана лишняя центровка, так как .header теперь space-between */
+  font-size: 1.8rem; /* Уменьшен для компактности */
+  white-space: nowrap; /* Предотвращает перенос текста */
+}

@@ -1,0 +1,790 @@
+@media screen and (max-width: 768px) {
+  .Margin {
+    margin: 20px;
+  }
+
+
+.Main.dark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(17, 17, 17, ); /* Более прозрачный для эффекта стекла */
+    box-shadow: 0 4px 8px rgba(155, 154, 154, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+    backdrop-filter: blur(20px); /* Эффект матового стекла */
+   box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+-webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+-moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+  }
+  .Main.light {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1); /* Более прозрачный для эффекта стекла */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+    backdrop-filter: blur(20px); /* Эффект матового стекла */
+    -webkit-backdrop-filter: blur(20px); /* Для Safari */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Лёгкая граница для стекла */
+    
+  }
+
+  .controls-wrapper.light {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 15px;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  .controls-wrapper.dark {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 15px;
+    margin: auto;
+    margin-bottom: 20px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+    padding: 15px;
+  }
+
+  /* --- Стили для кнопок фильтров и пагинации --- */
+
+  .Favorites.light,
+  .All.light,
+  .All.dark,
+  .Favorites.dark,
+  .Dislikes.light,
+  .Dislikes.dark {
+    border-radius: 5px;
+    height: 40px;
+    width: 50%; /* Каждая кнопка занимает половину ширины */
+    transition: 1s ease-in-out;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: none;
+  }
+
+  .Dislikes.dark,
+  .Favorites.dark,
+  .All.dark
+  {
+    border: solid 1px rgb(203, 203, 203);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .Dislikes.light,
+  .All.light,
+  .Favorites.light
+  {
+    background-color: rgb(203, 203, 203);
+    color: black;
+  }
+
+
+.Pagination-button {
+    border-radius: 5px;
+    height: 30px;
+    width: 100px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+
+  .Pagination-button.light {
+    background-color: rgb(255, 255, 255, 0.5);
+    transition: 1s ease-in-out;
+    border: none;
+  }
+
+  .Pagination-button.dark {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: 1s ease-in-out;
+  }
+
+  /* --- Стили для селекта (выпадающего списка) --- */
+
+#select.light{
+   display: flex;
+    flex-direction: row;
+    padding: 10px;
+    font-size: 16px;
+     width: 100%;
+      margin: auto;
+      cursor: pointer;
+}
+
+
+
+
+
+  #select.light {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: rgb(203, 203, 203);
+    transition: 1s ease-in-out;
+  }
+
+  #select.dark {
+    border: 1px solid #555;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    color: white;
+    transition: 1s ease-in-out;
+  }
+
+  /* --- Стили для ночного режима и оверлея --- */
+
+  .night-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10; /* Z-index ниже, чем у кнопок (z-index: 20) */
+    pointer-events: none;
+  }
+
+  .night-mode-button {
+    background-color: #0d0d0d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    transition: all 0.3s ease;
+  }
+
+  .night-mode-button:hover {
+    background-color: #555;
+  }
+
+  .night-mode-button.glowing {
+    background-color: #ffeb3b;
+    color: #000;
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+    animation: glow 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+    }
+    to {
+      box-shadow: 0 0 30px rgba(255, 235, 59, 1), 0 0 40px rgba(255, 235, 59, 0.5);
+    }
+  }
+
+
+
+
+  img.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 1s ease-out forwards;
+    will-change: transform, opacity;
+  }
+
+  .overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  width: 100vw;
+  height: 100vh;
+  animation: move 10s infinite alternate ease-in-out;
+}
+
+
+  .action-button-expanded {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 30px;
+    opacity: 0.7;
+  }
+
+  .blur-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.05); /* Более прозрачный для усиления frosted эффекта */
+    backdrop-filter: blur(25px); /* Увеличено до 25px для сильного матового размытия */
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 50;
+  }
+
+  .overlay-content {
+    position: relative;
+    z-index: 60;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .action-button {
+    background: rgba(255, 255, 255, 0.1); /* Более прозрачный для frosted glass */
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Тонкая граница */
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px); /* Добавлено blur для кнопки */
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .action-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+    transform: scale(1.05);
+    backdrop-filter: blur(20px); /* Увеличено при hover */
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .action-button {
+    background: rgba(0, 0, 0, 0.1); /* Темный вариант с frosted */
+    color: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .search-suggestion {
+    color: rgba(136, 136, 136, 0.7);
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .Content.fade-in::before {
+    animation: fadeInUp 1.5s ease-out forwards;
+  }
+
+
+
+.search {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top: 2vh
+}
+
+
+  .search-input-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .search-input {
+    position: relative;
+    width: 100%;
+    padding: 9px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px; /* Более жидкие углы */
+    font-size: 16px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.05); /* Прозрачный для frosted */
+    backdrop-filter: blur(20px); /* Сильное размытие */
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s ease-in-out;
+  }
+
+ 
+
+  .search-suggestion {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    font-size: 16px;
+    color: rgba(136, 136, 136, 0.7);
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
+    z-index: 1;
+  }
+
+  .search-input:focus + .search-suggestion,
+  .search-input:focus ~ .search-suggestion {
+    color: rgba(204, 204, 204, 0.8);
+  }
+
+  .section-picker-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(30px); /* Увеличено для сильного frosted */
+    -webkit-backdrop-filter: blur(30px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .section-picker-modal .modal-content {
+    background-color: rgba(255, 255, 255, 0.1); /* Прозрачный frosted фон */
+    color: var(--text-color, #333);
+    padding: 30px 40px;
+    border-radius: 25px; /* Жидкие углы */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(25px); /* Сильное размытие */
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+    min-width: 300px;
+    animation: liquidFloat 2s ease-in-out infinite;
+  }
+
+  .section-picker-modal .modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+  }
+
+  .section-picker-modal .modal-content select {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: 1px solid rgba(204, 204, 204, 0.3);
+    margin-bottom: 25px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color, #333);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .section-picker-modal .modal-content button {
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 15px;
+    border: 1px solid rgba(0, 123, 255, 0.3);
+    background-color: rgba(0, 123, 255, 0.1);
+    color: white;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .section-picker-modal .modal-content button:hover {
+    background-color: rgba(0, 123, 255, 0.2);
+    transform: scale(1.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .section-select-button {
+    cursor: pointer;
+    text-align: left;
+    padding: 8px 12px;
+    border: 1px solid rgba(204, 204, 204, 0.3);
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-color, #333);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes liquidFloat {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  img.fade-in:nth-child(odd) {
+    animation-delay: 0.1s;
+  }
+
+  img.fade-in:nth-child(even) {
+    animation-delay: 0.2s;
+  }
+
+  .section-select:focus {
+    border-color: rgba(0, 0, 0, 0.5);
+  }
+
+  .page-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+.input {
+    margin: auto;
+    border-radius: 20px; 
+    height: 40px;
+    padding: 20px;
+    width: 80%;
+    margin: auto;
+}
+
+
+
+  input.dark {
+    transition: 1s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  input.light {
+    transition: 1s ease-in-out;
+    background-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+    opacity: 0.7;
+  }
+
+
+  .Clear.dark {
+    margin: 0 auto;
+    background-color: rgba(203, 203, 203, 0.2);
+    border-radius: 15px;
+    height: 40px;
+    width: 120px;
+    min-width: 120px;
+    transition: 1s ease-in-out;
+    color: white;
+    font-size: 15px;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+
+  .Clear.light {
+    margin: 0 auto;
+    background-color: rgba(203, 203, 203, 0.2);
+    border-radius: 15px;
+    height: 40px;
+    width: 120px;
+    font-size: 15px;
+    min-width: 120px;
+    transition: 1s ease-in-out;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .Favorite {
+    margin: 0 auto;
+    background-color: rgba(203, 203, 203, 0.2);
+    border-radius: 15px;
+    height: 40px;
+    width: 120px;
+    min-width: 120px;
+    transition: 1s ease-in-out;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .Dislike {
+    margin: 0 auto;
+    background-color: rgba(203, 203, 203, 0.2);
+    border-radius: 15px;
+    width: 120px;
+    height: 40px;
+    min-width: 120px;
+    transition: 1s ease-in-out;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .Pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding-top: 3vh;
+    margin: auto;
+  }
+
+  .buttons-favorites {
+    display: flex;
+    margin: auto;
+    flex-direction: row;
+    gap: 2px;
+    margin-bottom: 20px;
+    width: 80%;
+  }
+
+  .first_block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
+  .internal_content {
+    margin: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vh;
+    background-color: rgba(255, 255, 255, 0.05); /* Прозрачный frosted */
+    color: black;
+    border-radius: 30px; /* Очень жидкие углы */
+    position: relative;
+    transition: width 1s ease, height 1s ease;
+    backdrop-filter: blur(25px); /* Сильное размытие */
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: liquidPulse 3s ease-in-out infinite;
+  }
+
+
+
+
+  .buttons-container {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    flex-direction: row;
+    gap: 10px;
+    z-index: 20;
+  }
+
+  .copy-button, .favorite-button, .dislike-button, .share-button {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 5px 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .copy-button:hover, .favorite-button:hover, .dislike-button:hover, .share-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+    transform: scale(1.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .favorite-button {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    border-radius: 20px;
+  }
+
+  .dislike-button {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    border-radius: 20px;
+  }
+
+  .NotFound {
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+
+  .NotFound {
+    color: rgb(255, 255, 255);
+  }
+
+  .getSectionTitle {
+    display: flex;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    justify-content: center;
+  }
+
+  .controls-wrapper {
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+  }
+
+  .night-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .night-mode-button {
+    background-color: rgba(51, 51, 51, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .night-mode-button:hover {
+    background-color: rgba(85, 85, 85, 0.4);
+    transform: scale(1.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+/* Стили для кнопок зума */
+.image-zoom-controls {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.zoom-button {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.zoom-button:hover:not(:disabled) {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.zoom-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Улучшения для зума изображений */
+.internal_content {
+  transition: width 0.5s ease, height 0.5s ease; /* Плавная анимация зума */
+}
+
+.internal_content.zoomed {
+  width: 50vh;
+  height: 25vh; /* Добавил height для пропорционального зума */
+  transform: none;
+}
+
+.internal_content img {
+  width: 100%; /* Адаптивная ширина по умолчанию */
+  height: 100%; /* Адаптивная высота по умолчанию */
+  object-fit: cover; /* Сохраняет пропорции */
+  border-radius: 30px;
+  transition: all 0.5s ease-in-out; /* Плавная анимация для изображения */
+}
+/* Специфические стили для zoomed (если нужно переопределить) */
+  
+
+}

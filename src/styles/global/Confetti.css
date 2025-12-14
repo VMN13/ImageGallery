@@ -1,0 +1,50 @@
+/* styles/global/Confetti.css */
+
+/* Контейнер, который задает систему координат для звездочек */
+.counter-wrapper {
+  position: relative;
+  display: inline-block; /* Чтобы он обтягивал контент плотно */
+}
+
+/* Абсолютно спозиционированный контейнер для звездочек */
+.confetti {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Чтобы звездочки не блокировали клики */
+  overflow: hidden; /* Чтобы звездочки не выходили за пределы контейнера */
+}
+
+/* Стили для каждой звездочки */
+.confetti-star {
+  position: absolute;
+  
+  /* Используем CSS-переменные, которые мы задали в компоненте */
+  left: var(--left);
+  
+  /* ИЗМЕНЕНО: Размещаем звездочки у самого верхнего края контейнера */
+  top: -10px; 
+  
+  font-size: 1.5rem;
+  color: rgb(155, 155, 152); /* Цвет звездочки */
+  text-shadow: 0 0 5px rgba(137, 137, 134, 0.7);
+
+  /* Применяем анимацию с нашими переменными */
+  animation: fall-and-fade var(--duration) var(--delay) ease-in forwards;
+}
+
+/* Ключевые кадры анимации: падение и затухание */
+@keyframes fall-and-fade {
+  0% {
+    /* ИЗМЕНЕНО: Начинаем анимацию с верха за пределами экрана */
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    /* Заканчиваем внизу экрана */
+    transform: translateY(100vh) rotate(720deg); 
+    opacity: 0;
+  }
+}

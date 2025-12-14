@@ -1,0 +1,322 @@
+.audio-player.dark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgb(0, 0, 0); /* Полупрозрачный фон */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  margin-top: 20px;
+  
+}
+
+.audio-player.light {
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255); /* Полупрозрачный фон */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease-in-out;
+  margin-top: 20px;
+}
+
+
+
+.sound-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}
+
+.sound-button, .control-button {
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.sound-button:hover, .control-button:hover {
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 1;
+  transform: translateY(-2px);
+}
+ .sound-button,.control-button {
+  background: rgba(0, 0, 0, 0.8);
+  color: rgb(255, 255, 255);
+}
+
+.sound-button.active {
+  opacity: 1;
+  font-weight: bold;
+  border: 2px solid #007bff;
+}
+
+.controls {
+  display: flex;
+  gap: 15px;
+}
+
+.control-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Круглые кнопки управления */
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-display {
+  font-size: 18px;
+  font-family: monospace;
+  color: #333;
+  opacity: 0.8;
+}
+
+.timer-display {
+  color: #f0f0f0;
+}
+
+/* Адаптивность для планшетов и мобильных */
+@media screen and (max-width: 768px) {
+  .audio-player {
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .sound-button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+  
+  .control-button {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .timer-display {
+    font-size: 16px;
+  }
+}
+
+
+/* Стили для дублирующего (fixed) плеера вверху */
+.floating-player {
+  position: fixed; /* Фиксирован вверху */
+  top: 0; /* Липнет к верху экрана */
+  right: 20px;
+  width: 250px;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.3s ease;
+}
+
+.floating-player.dark {
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+
+.floating-player.minimized {
+  width: 60px;
+  height: 60px;
+  padding: 5px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.close-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.close-button:hover {
+  color: #000;
+}
+
+.floating-player.dark .close-button:hover {
+  color: #fff;
+}
+
+.minimize-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.minimize-button:hover {
+  color: #000;
+}
+
+.floating-player.dark .minimize-button:hover {
+  color: #fff;
+}
+
+.floating-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.floating-control-button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+
+.floating-control-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.floating-player.dark .floating-control-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.floating-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
+}
+
+.floating-timer span {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.floating-seek-bar {
+  width: 100%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.floating-player.dark .floating-seek-bar {
+  background: #555;
+}
+
+.minimized-play {
+  font-size: 24px;
+  margin: auto;
+}
+
+/* Мобильная адаптация: плеер занимает всю ширину вверху */
+@media (max-width: 768px) {
+  .floating-player {
+    width: calc(100vw - 20px); /* Почти вся ширина экрана */
+    top: 0;
+    right: 10px;
+    left: 10px; /* Центрируем */
+  }
+  .floating-player.minimized {
+    width: 50px;
+    height: 50px;
+    top: 0;
+    right: 10px;
+    left: auto; /* Возвращаем к правому краю */
+  }
+}
+
+
+/* Стили для громкости в основном плеере */
+.volume-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.volume-control label {
+  font-size: 14px;
+  color: #333;
+}
+
+ .volume-control label {
+  color: #f0f0f0;
+}
+
+.volume-bar {
+  width: 80%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+ .volume-bar {
+  background: #555;
+}
+
+/* Стили для громкости в дублирующем плеере */
+.floating-volume {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 5px;
+}
+
+.floating-volume-bar {
+  width: 80%;
+  height: 5px;
+  background: #ddd;
+  border-radius: 5px;
+  outline: none;
+  cursor: pointer;
+}
+
+.floating-player.dark .floating-volume-bar {
+  background: #555;
+}
+
+/* Стили для перетаскивания */
+.floating-player {
+  cursor: move; /* Курсор для перетаскивания */
+}
+
+.floating-player.dragging {
+  opacity: 0.8; /* Полупрозрачность при перетаскивании */
+  user-select: none; /* Запрет выделения текста */
+
+
+  
+}
