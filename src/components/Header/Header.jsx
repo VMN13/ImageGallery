@@ -19,7 +19,7 @@ const Header = () => {
     event.stopPropagation();
     toggleTheme();
   };
- 
+
   return (
     <div 
       className={`Header ${isDarkMode ? "dark" : "light"}`} 
@@ -29,7 +29,7 @@ const Header = () => {
       <div className={`header ${isDarkMode ? "dark" : "light"}`}>
         <h1 className="h1_header">Image Gallery</h1>
         <button className={`Mode ${isDarkMode ? "light" : "dark"}`} onClick={handleThemeToggle}>
-          {isDarkMode ? "Light Mode" : "Dark Mode"}
+          {isDarkMode ? "🌞" : "🌜"}
         </button>              
         <div className="section"></div>
       </div>

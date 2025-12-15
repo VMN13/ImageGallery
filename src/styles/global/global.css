@@ -94,7 +94,7 @@ p {
 }
 
 .centered-counter {
-  margin: 20px;
+  margin: 10px;
   display: flex;
   justify-content: center;
 }
