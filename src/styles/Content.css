@@ -11,15 +11,36 @@
     gap: 15px;
     padding: 20px;
     border-radius: 20px;
-    background-color: rgba(17, 17, 17, ); /* Более прозрачный для эффекта стекла */
+    
     box-shadow: 0 4px 8px rgba(155, 154, 154, 0.1);
     transition: all 0.3s ease-in-out;
     margin-top: 20px;
     backdrop-filter: blur(20px); /* Эффект матового стекла */
-   box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+    box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
 -webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
 -moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+  animation: flicker 4s infinite; /* Добавлена анимация мерцания */
   }
+
+.ALL_OR_MODE {
+  display: flex;
+  justify-content: row;
+}
+
+@keyframes flicker {
+    0%, 100% {
+        box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+        -webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+        -moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+    }
+    50% {
+        box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.3);
+        -webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.3);
+        -moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.3);
+    }
+}
+
+
   .Main.light {
     display: flex;
     flex-direction: column;
@@ -58,7 +79,7 @@
     gap: 15px;
     margin: auto;
     margin-bottom: 20px;
-    background-color: rgb(0, 0, 0);
+   
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
@@ -158,16 +179,7 @@
 
   /* --- Стили для ночного режима и оверлея --- */
 
-  .night-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    z-index: 10; /* Z-index ниже, чем у кнопок (z-index: 20) */
-    pointer-events: none;
-  }
+ 
 
   .night-mode-button {
     background-color: #0d0d0d;
@@ -322,6 +334,7 @@
     display: flex;
     flex-direction: row;
     width: 100%;
+    position: relative;
   }
 
   .search-input {
@@ -340,23 +353,24 @@
 
  
 
-  .search-suggestion {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding: 10px;
-    font-size: 16px;
-    color: rgba(136, 136, 136, 0.7);
-    pointer-events: none;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-    box-sizing: border-box;
-    background: transparent;
-    border: none;
-    z-index: 1;
-  }
+ .search-suggestion {
+  position: absolute;
+  margin-top: 15px;
+  left: 10px;
+  transform: translateY(-50%);  
+  padding: 0;
+  font-size: 16px;
+  color: rgba(136, 136, 136, 0.7);
+  pointer-events: none;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: calc(100% - 20px);
+  box-sizing: border-box;
+  background: transparent;
+  border: none;
+  z-index: 1;
+}
 
   .search-input:focus + .search-suggestion,
   .search-input:focus ~ .search-suggestion {
@@ -500,6 +514,7 @@
   input.dark {
     transition: 1s ease-in-out;
     background-color: rgba(255, 255, 255, 0.05);
+    color: white;
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -509,6 +524,7 @@
     transition: 1s ease-in-out;
     background-color: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(20px);
+    color: black;
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
@@ -620,7 +636,6 @@
 
 
 
-
   .buttons-container {
     display: flex;
     position: absolute;
@@ -701,19 +716,7 @@
     border-radius: 20px;
   }
 
-  .night-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    z-index: 10;
-    pointer-events: none;
-  }
-
+ 
   .night-mode-button {
     background-color: rgba(51, 51, 51, 0.2);
     color: white;
@@ -786,5 +789,9 @@
 }
 /* Специфические стили для zoomed (если нужно переопределить) */
   
+#select.dark {
+  background-color: rgba(255, 0.05);
+}
+
 
 }

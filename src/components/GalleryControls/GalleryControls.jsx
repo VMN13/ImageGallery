@@ -37,24 +37,10 @@ const GalleryControls = observer(() => {
         <SearchComponent 
           searchTerm={galleryStore.searchTerm}
           setSearchTerm={galleryStore.setSearchTerm}
-          images={[]}  // Замените на реальный массив изображений с типом
+          images={galleryStore.filteredImages}  // Замените на реальный массив изображений с типом
           isDarkMode={isDarkMode}
         />
-        <div className="search">
-          <select  
-            id={`select ${isDarkMode ? 'dark' : 'light'}`}
-            value={galleryStore.currentSection}
-            onChange={(e) => galleryStore.setCurrentSection(e.target.value)}
-            onFocus={() => setIsSelectFocused(true)}
-          >
-            <option value="all">Все разделы</option>
-            <option value="nature">Природа</option>
-            <option value="cities">Города</option>
-            <option value="animals">Животные</option>
-            <option value="tech">Технологии</option>
-            <option value="food">Еда</option>
-          </select>
-        </div>
+    
         <div className="buttons-favorites"> 
           <button
             className={`All ${isDarkMode ? 'dark' : 'light'} ${galleryStore.filterMode === 'all' ? 'active' : ''}`}

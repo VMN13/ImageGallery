@@ -8,7 +8,7 @@ import { useTheme } from "../ThemeContext";
 
 const GalleryGrid = observer(({ nightMode, setNightMode, onOpenModal, onPageChange }) => {
   const { isDarkMode } = useTheme();
-
+  const [isSelectFocused, setIsSelectFocused] = useState(false);
   const isZoomed = galleryStore.zoomLevel === 'zoomed';
 
   return (
@@ -16,7 +16,25 @@ const GalleryGrid = observer(({ nightMode, setNightMode, onOpenModal, onPageChan
       <Pagination currentPage={galleryStore.currentPage} totalPages={galleryStore.totalPages} onPageChange={onPageChange} />
       
       <div className={`Main ${isDarkMode ? 'dark' : 'light'}`}>
+        <div className="ALL_OR_MODE">
         <NightModeButton nightMode={nightMode} setNightMode={setNightMode} />
+         <div className="search">
+          <select  
+            id={`select ${isDarkMode ? 'dark' : 'light'}`}
+            value={galleryStore.currentSection}
+            style={{ backgroundColor: isDarkMode ?  '#333' : '#fff', color: isDarkMode ?  '#fff' : '#333 ', border: 'none'     }}
+            onChange={(e) => galleryStore.setCurrentSection(e.target.value)}
+            onFocus={() => setIsSelectFocused(true)}
+          >
+            <option value="all">Все разделы</option>
+            <option value="nature">Природа</option>
+            <option value="cities">Города</option>
+            <option value="animals">Животные</option>
+            <option value="tech">Технологии</option>
+            <option value="food">Еда</option>
+          </select>
+        </div>
+        </div>
         {galleryStore.filterMode === 'favorites' && (
           <div>
             <div className="d"></div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import { useTheme } from "../ThemeContext";
-import ImageModal from "../ImageModal/ImageModal"; 
+import ImageModal from "../ImageModal/ImageModal";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import GalleryControls from "../GalleryControls/GalleryControls";
 import GalleryGrid from "../GalleryGrid/GalleryGrid";
@@ -94,6 +94,7 @@ const CombinedContent = observer(() => {
 
   return (
     <>
+      {nightMode && <div className="night-overlay"></div>}
       <div className={`Margin ${isDarkMode ? 'dark' : 'light'}`}>
         <GalleryControls />
         <GalleryGrid 
@@ -102,7 +103,7 @@ const CombinedContent = observer(() => {
           onOpenModal={openModal}
           onPageChange={handlePageChange}
         />
-        <AudioPlayer />  
+        <AudioPlayer />
         <ImageModal isOpen={isModalOpen} onClose={closeModal} image={modalImage} shareImageUrl={shareImageUrl} />
       </div>
     </>
