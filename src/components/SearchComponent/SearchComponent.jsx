@@ -61,6 +61,12 @@ const SearchComponent = observer(({
 
   const suggestion = getSuggestion(searchTerm);
 
+  const handleSuggestionClick = () => {
+    if (suggestion) {
+      setSearchTerm(searchTerm + suggestion);
+    }
+  };
+
   return (
     <div className="search">
       <div className="search-input-container">
@@ -75,7 +81,18 @@ const SearchComponent = observer(({
         />
         <button className={`Clear ${isDarkMode ? 'dark' : 'light'} equal-width`} type="button" onClick={() => setSearchTerm('')}>Очистить</button>
         {suggestion && (
-          <span className="search-suggestion" style={{ opacity: 0.5, position: 'absolute', left: '10px', top: '5px' }}>
+          <span 
+            className="search-suggestion" 
+            style={{ 
+              opacity: 0.5, 
+              position: 'absolute', 
+              left: '10px', 
+              top: '5px', 
+              cursor: 'pointer', 
+              textDecoration: 'underline' 
+            }}
+            onClick={handleSuggestionClick}
+          >
             {searchTerm}{suggestion}
           </span>
         )}

@@ -7,7 +7,10 @@ const soundUrls = {
   sea: '/sounds/sea.mp3',
   forest: '/sounds/forest.mp3',
   rain: '/sounds/rain.mp3',
-  calm: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+  calm: '/sounds/sunny.mp3',
+  market: '/sounds/market.mp3',
+  kolokol: '/sounds/kolokol.mp3',
+  veter: '/sounds/veter.mp3'
 };
 
 const soundNames = {
@@ -15,6 +18,9 @@ const soundNames = {
   forest: 'Лес',
   rain: 'Дождь',
   calm: 'Спокойная погода',
+  market: 'Рынок',
+  kolokol: 'Колокола',
+  veter: 'Ветер'
 };
 
 const AudioPlayer = () => {

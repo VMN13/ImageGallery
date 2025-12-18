@@ -3,6 +3,7 @@ import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import { useTheme } from "../ThemeContext";
 import ImageModal from "../ImageModal/ImageModal";
+import Preload from "../Preload/Preload";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import GalleryControls from "../GalleryControls/GalleryControls";
 import GalleryGrid from "../GalleryGrid/GalleryGrid";
@@ -14,10 +15,23 @@ const CombinedContent = observer(() => {
   const [isSelectFocused, setIsSelectFocused] = useState(false);
   const selectContainerRef = useRef(null);
   const [nightMode, setNightMode] = useState(false);
+  const [isPreloading, setIsPreloading] = useState(true);
   const [showActionButtons, setShowActionButtons] = useState({});
   const [actionTimeouts, setActionTimeouts] = useState({});
   const user = true; // Предполагаем, что это будет заменено на реальный тип из аутентификации
   const { isDarkMode } = useTheme();
+
+
+
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPreloading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -91,6 +105,10 @@ const CombinedContent = observer(() => {
       window.open(`mailto:?subject=${subject}&body=${body}`);
     }
   };
+
+  if (isPreloading) {
+    return <Preload />;
+  }
 
   return (
     <>
