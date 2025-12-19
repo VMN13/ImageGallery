@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react";
 import { observer } from "mobx-react-lite";
+import styles from "./SearchComponent.module.css"; // Добавлен импорт модуля
 
 const SearchComponent = observer(({
   searchTerm,
@@ -33,10 +34,10 @@ const SearchComponent = observer(({
       if (
         inputRef.current &&
         !inputRef.current.contains(e.target) &&
-        !e.target.closest('.Pagination') &&
-        !e.target.closest('.buttons-favorites') &&
-        !e.target.closest('.search') &&
-        !e.target.closest('.Main')
+        !e.target.closest('.Pagination') && // Оставлено как глобальный класс
+        !e.target.closest('.buttons-favorites') && // Оставлено как глобальный класс
+        !e.target.closest('.search') && // Оставлено как глобальный класс
+        !e.target.closest('.Main') // Оставлено как глобальный класс
       ){
         setSearchTerm('');
       }
@@ -68,8 +69,8 @@ const SearchComponent = observer(({
   };
 
   return (
-    <div className="search">
-      <div className="search-input-container">
+    <div className={styles.search}>
+      <div className={styles.searchInputContainer}>
         <input
           ref={inputRef}
           type="text"
@@ -77,12 +78,12 @@ const SearchComponent = observer(({
           value={searchTerm}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
-          className={`search-input ${isDarkMode ? "dark" : "light"}`}
+          className={`${styles.searchInput} ${isDarkMode ? styles.inputDark : styles.inputLight}`}
         />
-        <button className={`Clear ${isDarkMode ? 'dark' : 'light'} equal-width`} type="button" onClick={() => setSearchTerm('')}>Очистить</button>
+        <button className={`${styles.Clear} ${isDarkMode ? styles.ClearDark : styles.ClearLight} equal-width`} type="button" onClick={() => setSearchTerm('')}>Очистить</button>
         {suggestion && (
           <span 
-            className="search-suggestion" 
+            className={styles.searchSuggestion} 
             style={{ 
               opacity: 0.5, 
               position: 'absolute', 

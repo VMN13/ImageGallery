@@ -1,0 +1,169 @@
+@media screen and (max-width: 768px) {
+  .firstBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .internalContent {
+    margin: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40vh;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: black;
+    border-radius: 30px;
+    position: relative;
+    transition: width 1s ease, height 1s ease;
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: liquidPulse 3s ease-in-out infinite;
+  }
+
+  .buttonsContainer {
+    display: flex;
+    position: absolute;
+    bottom: 8px;
+    flex-direction: row;
+    gap: 10px;
+    z-index: 20;
+  }
+
+  .copyButton,
+  .favoriteButton,
+  .dislikeButton,
+  .shareButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 5px 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    opacity: 0.7;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .copyButton:hover,
+  .favoriteButton:hover,
+  .dislikeButton:hover,
+  .shareButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
+    transform: scale(1.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .favoriteButton {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    border-radius: 20px;
+  }
+
+  .dislikeButton {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    border-radius: 20px;
+  }
+
+  .actionButtonExpanded {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    font-size: 30px;
+    opacity: 0.7;
+  }
+
+  .actionButton {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 5px 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+  }
+
+  .actionButton:hover {
+    background: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+    transform: scale(1.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .actionButtonDark {
+    background: rgba(0, 0, 0, 0.1);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .imageZoomControls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 10px 0;
+  }
+
+  .zoomButton {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  .zoomButton:hover:not(:disabled) {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+  }
+
+  .zoomButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .internalContent {
+    transition: width 0.5s ease, height 0.5s ease;
+  }
+
+  .internalContentZoomed {
+    width: 50vh;
+    height: 25vh;
+    transform: none;
+  }
+
+  .internalContent img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+     border-radius: 30px;
+    transition: all 0.5s ease-in-out;
+  }
+}

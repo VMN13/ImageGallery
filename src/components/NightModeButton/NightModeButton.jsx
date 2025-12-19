@@ -1,11 +1,12 @@
 import React from 'react';
+import styles from './NightModeButton.module.css';
 
 const NightModeButton = ({ nightMode, setNightMode }) => {
   return (
     <>
-      {nightMode && <div className="night-overlay"></div>}
+      {nightMode && <div className="night-overlay"></div>} {/* Оставлено как глобальный класс (из global.css) */}
       <button 
-        className={`night-mode-button ${nightMode ? 'glowing' : ''}`} 
+        className={`${styles.nightModeButton} ${nightMode ? styles.nightModeButtonGlowing : ''}`} 
         onClick={() => setNightMode(!nightMode)}
       >
         {nightMode ? "🌞" : "🌜"}

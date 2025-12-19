@@ -1,0 +1,121 @@
+/* Header.module.css */
+
+.Counter {
+  font-size: 18px;
+  margin: 0 10px;
+  color: inherit;
+  font-weight: normal;
+}
+
+.headerLight {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0 20px;
+}
+
+.headerDark {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 0 20px;
+  box-shadow: 10px 10px 400px 41px rgba(255, 111, 62, 0.75);
+  -webkit-box-shadow: 10px 10px 400px 41px rgba(255, 111, 62, 0.75);
+  -moz-box-shadow: 10px 10px 400px 41px rgba(255, 111, 62, 0.75);
+}
+
+.ModeLight {
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  animation: gentleGlow 4s ease-in-out infinite;
+}
+
+.ModeDark {
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: none;
+  animation: shadowFlicker 4s ease-in-out infinite;
+}
+
+@keyframes gentleGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(186, 175, 27, 0.9), 0 0 40px rgba(255, 183, 0, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 1), 0 0 45px rgba(236, 174, 2, 0.8);
+  }
+}
+
+@keyframes shadowFlicker {
+  0%, 100% {
+    box-shadow: 10px 10px 400px 41px rgba(5, 151, 218, 0.75);
+    -webkit-box-shadow: 10px 10px 400px 41px rgba(37, 180, 219, 0.75);
+    -moz-box-shadow: 10px 10px 400px 41px rgba(0, 0, 0, 0.75);
+  }
+  50% {
+    box-shadow: 10px 10px 400px 41px rgba(255, 255, 255, 0.3);
+    -webkit-box-shadow: 10px 10px 400px 41px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow: 10px 10px 400px 41px rgba(1, 150, 187, 0.3);
+  }
+}
+
+.HeaderLight {
+  background-color: rgba(255, 255, 255, 0.5);
+  background-size: 20px;
+  background-position: center;
+  color: rgb(0, 0, 0);
+}
+
+.HeaderDark {
+  background: rgba(0, 0, 0, 0.8);
+  background-size: cover;
+  background-position: center;
+  color: rgb(255, 255, 255);
+}
+
+.themeToggle {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: inherit;
+}
+
+.h1Header {
+  margin: 0;
+  font-size: 1.8rem;
+  white-space: nowrap;
+}
+
+.section {
+  /* Пустой класс, если нужно добавить стили */
+}

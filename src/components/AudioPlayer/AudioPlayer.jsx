@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';  // Import createPortal from 'react-dom'
 import { useTheme } from '../ThemeContext';
-import './AudioPlayer.css';
+import styles from './AudioPlayer.module.css'; // Добавлен импорт модуля
 
 const soundUrls = {
   sea: '/sounds/sea.mp3',
@@ -215,7 +215,7 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div className={`audio-player ${isDarkMode ? 'dark' : 'light'}`}>
+      <div className={`${styles.audioPlayer} ${isDarkMode ? styles.audioPlayerDark : styles.audioPlayerLight}`}>
         <audio
           ref={audioRef}
           onLoadedMetadata={handleLoadedMetadata}
@@ -225,11 +225,11 @@ const AudioPlayer = () => {
           }}
         />
         
-        <div className="sound-buttons">
+        <div className={styles.soundButtons}>
           {Object.keys(soundUrls).map((sound) => (
             <button
               key={sound}
-              className={`sound-button ${isDarkMode ? 'dark' : 'light'} ${currentSound === sound ? 'active' : ''}`}
+              className={`${styles.soundButton} ${isDarkMode ? styles.soundButtonDark : styles.soundButtonLight} ${currentSound === sound ? styles.soundButtonActive : ''}`}
               onClick={() => handlePlay(sound)}
             >
               {soundNames[sound]}
@@ -237,16 +237,16 @@ const AudioPlayer = () => {
           ))}
         </div>
 
-        <div className="controls">
-          <button className={`control-button ${isDarkMode ? 'dark' : 'light'}`} onClick={isPlaying ? handlePause : () => handlePlay(currentSound || 'sea')}>
+        <div className={styles.controls}>
+          <button className={`${styles.controlButton} ${isDarkMode ? styles.controlButtonDark : styles.controlButtonLight}`} onClick={isPlaying ? handlePause : () => handlePlay(currentSound || 'sea')}>
             {isPlaying ? '⏸️' : '▶️'}
           </button>
-          <button className={`control-button ${isDarkMode ? 'dark' : 'light'}`} onClick={handleStop}>
+          <button className={`${styles.controlButton} ${isDarkMode ? styles.controlButtonDark : styles.controlButtonLight}`} onClick={handleStop}>
             ⏹️
           </button>
         </div>
 
-        <div className={`timer-display ${isDarkMode ? 'dark' : 'light'}`}>
+        <div className={`${styles.timerDisplay} ${isDarkMode ? styles.timerDisplayDark : styles.timerDisplayLight}`}>
           <span>{formatTime(playbackTime)}</span>
           <input 
             type='range' 
@@ -254,12 +254,12 @@ const AudioPlayer = () => {
             max={duration || 0} 
             value={playbackTime} 
             onChange={handleSeek}
-            className={`seek-bar ${isDarkMode ? 'dark' : 'light'}`}
+            className={`${styles.seekBar} ${isDarkMode ? styles.seekBarDark : styles.seekBarLight}`}
             disabled={!duration}
           />
         </div>
 
-        <div className={`volume-control ${isDarkMode ? 'dark' : 'light'}`}>
+        <div className={`${styles.volumeControl} ${isDarkMode ? styles.volumeControlDark : styles.volumeControlLight}`}>
           <label>Громкость:</label>
           <input 
             type='range' 
@@ -268,35 +268,35 @@ const AudioPlayer = () => {
             step='0.1' 
             value={volume} 
             onChange={handleVolumeChange}
-            className={`volume-bar ${isDarkMode ? 'dark' : 'light'}`}
+            className={`${styles.volumeBar} ${isDarkMode ? styles.volumeBarDark : styles.volumeBarLight}`}
           />
         </div>
       </div>
 
       {showFloatingPlayer && createPortal(
         <div 
-          className={`floating-player ${isDarkMode ? 'dark' : 'light'} ${isMinimized ? 'minimized' : ''} ${isDragging ? 'dragging' : ''}`}
+          className={`${styles.floatingPlayer} ${isDarkMode ? styles.floatingPlayerDark : styles.floatingPlayerLight} ${isMinimized ? styles.floatingPlayerMinimized : ''} ${isDragging ? styles.floatingPlayerDragging : ''}`}
           style={{ top: floatingPosition.top, left: floatingPosition.left }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         >
-          <button className="close-button" onClick={handleCloseFloatingPlayer}>✕</button>
-          <button className="minimize-button" onClick={toggleMinimize}>
+          <button className={styles.closeButton} onClick={handleCloseFloatingPlayer}>✕</button>
+          <button className={styles.minimizeButton} onClick={toggleMinimize}>
             {isMinimized ? '⤢' : '⤡'}
           </button>
           {!isMinimized && (
             <>
-              <div className="floating-controls">
-                <button className="floating-control-button" onClick={handlePrev}>◀</button>
-                <button className="floating-control-button" onClick={isPlaying ? handlePause : () => handlePlay(currentSound)}>
+              <div className={styles.floatingControls}>
+                <button className={styles.floatingControlButton} onClick={handlePrev}>◀</button>
+                <button className={styles.floatingControlButton} onClick={isPlaying ? handlePause : () => handlePlay(currentSound)}>
                   {isPlaying ? '⏸️' : '▶️'}
                 </button>
-                <button className="floating-control-button" onClick={handleStop}>
+                <button className={styles.floatingControlButton} onClick={handleStop}>
                   ⏹️
                 </button>
-                <button className="floating-control-button" onClick={handleNext}>▶</button>
+                <button className={styles.floatingControlButton} onClick={handleNext}>▶</button>
               </div>
-              <div className="floating-timer">
+              <div className={styles.floatingTimer}>
                 <span>{formatTime(playbackTime)}</span>
                 <input 
                   type='range' 
@@ -304,11 +304,11 @@ const AudioPlayer = () => {
                   max={duration || 0} 
                   value={playbackTime} 
                   onChange={handleSeek}
-                  className="floating-seek-bar"
+                  className={styles.floatingSeekBar}
                   disabled={!duration}
                 />
               </div>
-              <div className="floating-volume">
+              <div className={styles.floatingVolume}>
                 <input 
                   type='range' 
                   min='0' 
@@ -316,13 +316,13 @@ const AudioPlayer = () => {
                   step='0.1' 
                   value={volume} 
                   onChange={handleVolumeChange}
-                  className="floating-volume-bar"
+                  className={styles.floatingVolumeBar}
                 />
               </div>
             </>
           )}
           {isMinimized && (
-            <button className="floating-control-button minimized-play" onClick={isPlaying ? handlePause : () => handlePlay(currentSound)}>
+            <button className={styles.floatingControlButtonMinimizedPlay} onClick={isPlaying ? handlePause : () => handlePlay(currentSound)}>
               {isPlaying ? '⏸️' : '▶️'}
             </button>
           )}

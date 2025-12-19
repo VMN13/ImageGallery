@@ -1,0 +1,39 @@
+@media screen and (max-width: 768px) {
+  .nightModeButton {
+    background-color: rgba(51, 51, 51, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px auto;
+    display: block;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nightModeButton:hover {
+    background-color: rgba(85, 85, 85, 0.4);
+    transform: scale(1.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .nightModeButtonGlowing {
+    background-color: #ffeb3b;
+    color: #000;
+    box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+    animation: glow 1.5s ease-in-out infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(255, 235, 59, 0.8);
+    }
+    to {
+      box-shadow: 0 0 30px rgba(255, 235, 59, 1), 0 0 40px rgba(255, 235, 59, 0.5);
+    }
+  }
+}

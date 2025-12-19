@@ -18,7 +18,7 @@ const GalleryGrid = observer(({ nightMode, setNightMode, onOpenModal, onPageChan
       <div className={`Main ${isDarkMode ? 'dark' : 'light'}`}>
         <div className="ALL_OR_MODE">
         <NightModeButton nightMode={nightMode} setNightMode={setNightMode} />
-         <div className="search">
+          <div className="search">
           <select  
             id={`select ${isDarkMode ? 'dark' : 'light'}`}
             value={galleryStore.currentSection}

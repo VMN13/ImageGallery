@@ -1,0 +1,54 @@
+@media screen and (max-width: 768px) {
+  .controlsWrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: 20px;
+    gap: 15px;
+    margin: auto;
+    margin-bottom: 30px;
+    margin-top: 30px;
+    padding: 15px;
+  }
+
+  .controlsWrapperLight {
+    background-color: rgba(255, 255, 255, 0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .controlsWrapperDark {
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+  }
+
+  .AllLight,
+  .AllDark,
+  .FavoritesLight,
+  .FavoritesDark,
+  .DislikesLight,
+  .DislikesDark {
+    border-radius: 5px;
+    height: 50px;
+    width: 50%;
+    transition: 1s ease-in-out;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-size: 20px;
+  }
+
+  .AllDark,
+  .FavoritesDark,
+  .DislikesDark {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .AllLight,
+  .FavoritesLight,
+  .DislikesLight {
+    background-color: rgb(255, 255, 255);
+    color: black;
+    border: 1px solid rgba(241, 241, 241, 0.062);
+  }
+}

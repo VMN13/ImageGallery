@@ -1,7 +1,7 @@
 import React from "react";
 import { useTheme } from "../ThemeContext";
 import galleryStore from "../../stores/GalleryStore";
-import "./Header.css";
+import styles from "./Header.module.css"; // Добавлен импорт модуля
 
 const Header = () => {
   const { isDarkMode, toggleTheme } = useTheme();
@@ -22,16 +22,16 @@ const Header = () => {
 
   return (
     <div 
-      className={`Header ${isDarkMode ? "dark" : "light"}`} 
+      className={`${styles.Header} ${isDarkMode ? styles.HeaderDark : styles.HeaderLight}`} 
       onClick={handleShowAllPhotos}
       style={{ cursor: 'pointer' }}
     >
-      <div className={`header ${isDarkMode ? "dark" : "light"}`}>
-        <h1 className="h1_header">Image Gallery</h1>
-        <button className={`Mode ${isDarkMode ? "light" : "dark"}`} onClick={handleThemeToggle}>
+      <div className={`${styles.header} ${isDarkMode ? styles.headerDark : styles.headerLight}`}>
+        <h1 className={styles.h1Header}>Image Gallery</h1>
+        <button className={`${styles.Mode} ${isDarkMode ? styles.ModeDark : styles.ModeLight}`} onClick={handleThemeToggle}>
           {isDarkMode ? "🌞" : "🌜"}
         </button>              
-        <div className="section"></div>
+        <div className={styles.section}></div>
       </div>
     </div>
   );

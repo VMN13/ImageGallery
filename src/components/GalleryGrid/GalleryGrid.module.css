@@ -1,0 +1,86 @@
+@media screen and (max-width: 768px) {
+  .ContentDark {
+    /* Стили для .Content.dark */
+  }
+
+  .ContentLight {
+    /* Стили для .Content.light */
+  }
+
+  .MainDark {
+    /* Стили для .Main.dark (уже в CombinedContent, но если нужно дублировать) */
+  }
+
+  .MainLight {
+    /* Стили для .Main.light */
+  }
+
+  .ALL_OR_MODE {
+    display: flex;
+    justify-content: row;
+  }
+
+  .search {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .selectLight {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
+    margin: auto;
+    cursor: pointer;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    background-color: rgb(203, 203, 203);
+    transition: 1s ease-in-out;
+  }
+
+  .selectDark {
+    border: 1px solid #555;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    color: white;
+    transition: 1s ease-in-out;
+  }
+
+  .NotFound {
+    text-align: center;
+    color: rgb(0, 0, 0);
+  }
+
+  .NotFoundDark {
+    color: rgb(255, 255, 255);
+  }
+
+  .pageInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .getSectionTitle {
+    display: flex;
+    font-size: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    justify-content: center;
+  }
+}

@@ -3,7 +3,8 @@ import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import PhotoCounter from "../PhotoCounter/PhotoCounter";
 import SearchComponent from "../SearchComponent/SearchComponent";
-import { useTheme } from "../ThemeContext";
+import styles from "./GalleryControls.module.css"; // Импорт модуля
+import { useTheme } from "../ThemeContext"; // Добавлен импорт
 
 const GalleryControls = observer(() => {
   const { isDarkMode } = useTheme();
@@ -29,33 +30,33 @@ const GalleryControls = observer(() => {
   };
 
   return (
-    <div className={`controls-wrapper ${isDarkMode ? 'dark' : 'light'}`} ref={selectContainerRef}>
-      <div className="centered-counter">
+    <div className={`${styles.controlsWrapper} ${isDarkMode ? styles.controlsWrapperDark : styles.controlsWrapperLight}`} ref={selectContainerRef}> {/* Обновлено */}
+      <div className={styles.centeredCounter}> {/* Добавлено, если нужно */}
         <PhotoCounter />
       </div>
-      <div className="search-and-filter-container">
+      <div className={styles.searchAndFilterContainer}> {/* Добавлено, если нужно */}
         <SearchComponent 
           searchTerm={galleryStore.searchTerm}
           setSearchTerm={galleryStore.setSearchTerm}
-          images={galleryStore.filteredImages}  // Замените на реальный массив изображений с типом
+          images={galleryStore.filteredImages}
           isDarkMode={isDarkMode}
         />
     
-        <div className="buttons-favorites"> 
+        <div className={styles.buttonsFavorites}> {/* Обновлено */}
           <button
-            className={`All ${isDarkMode ? 'dark' : 'light'} ${galleryStore.filterMode === 'all' ? 'active' : ''}`}
+            className={`${isDarkMode ? styles.AllDark : styles.AllLight} ${galleryStore.filterMode === 'all' ? 'active' : ''}`}
             onClick={() => galleryStore.setFilterMode('all')}
           >
             Все
           </button>
           <button 
-            className={`Favorites ${isDarkMode ? 'dark' : 'light'} ${galleryStore.filterMode === 'favorites' ? 'active' : ''}`} 
+            className={`${isDarkMode ? styles.FavoritesDark : styles.FavoritesLight} ${galleryStore.filterMode === 'favorites' ? 'active' : ''}`} 
             onClick={() => galleryStore.setFilterMode(galleryStore.filterMode === 'favorites' ? 'all' : 'favorites')}
           >
             {galleryStore.filterMode === 'favorites' ? 'Показать все' : 'Избранные'}
           </button> 
           <button 
-            className={`Dislikes ${isDarkMode ? 'dark' : 'light'} ${galleryStore.filterMode === 'dislikes' ? 'active' : ''}`} 
+            className={`${isDarkMode ? styles.DislikesDark : styles.DislikesLight} ${galleryStore.filterMode === 'dislikes' ? 'active' : ''}`} 
             onClick={() => galleryStore.setFilterMode(galleryStore.filterMode === 'dislikes' ? 'all' : 'dislikes')}
           >
             {galleryStore.filterMode === 'dislikes' ? 'Показать все' : 'Дизы'}

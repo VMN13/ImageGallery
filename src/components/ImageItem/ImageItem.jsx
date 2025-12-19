@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import LazyImage from "../../components/LazyImage/LazyImage";
+import styles from "./ImageItem.module.css"; // Импорт модуля
 
 const ImageItem = observer(({ image, onOpenModal }) => {
   const [showActionButtons, setShowActionButtons] = useState(false);
@@ -57,37 +58,37 @@ const ImageItem = observer(({ image, onOpenModal }) => {
   const isZoomed = galleryStore.getZoomLevelForImage(image.id) === 'zoomed';
 
   return (
-    <div className="first_block">
-      <div className={`internal_content ${isZoomed ? 'zoomed' : ''}`}>
+    <div className={styles.firstBlock}> {/* Обновлено */}
+      <div className={`${styles.internalContent} ${isZoomed ? styles.internalContentZoomed : ''}`}> {/* Обновлено */}
         <LazyImage 
           src={image.url} 
           alt={image.alt}
           className={`fade-in ${isZoomed ? 'zoomed' : ''}`} 
           onClick={() => onOpenModal(image)} 
         />
-        <div className="buttons-container">
-          <button className='action-button-expanded' onClick={toggleActionButtons}>➦
+        <div className={styles.buttonsContainer}> {/* Обновлено */}
+          <button className={styles.actionButtonExpanded} onClick={toggleActionButtons}>➦
             {showActionButtons && (
-              <div className="action-buttons-expanded">
-                <button className="copy-button" onClick={() => copyImageUrl(image.url)}>Copy!</button>
-                <button className="share-button" onClick={() => shareImageUrl(image.url, image.alt)}>Share!</button>
+              <div className={styles.actionButtonsExpanded}> {/* Добавлено, если нужно */}
+                <button className={styles.copyButton} onClick={() => copyImageUrl(image.url)}>Copy!</button>
+                <button className={styles.shareButton} onClick={() => shareImageUrl(image.url, image.alt)}>Share!</button>
               </div>
             )}
           </button>
           <button 
             onClick={handleZoomToggle} 
-            className="zoom-button" 
+            className={styles.zoomButton} 
             title={isZoomed ? "Уменьшить" : "Увеличить"}
           >
             {isZoomed ? '➖' : '➕'}
           </button>
           {galleryStore.filterMode !== 'dislikes' && (
-            <button className="favorite-button" onClick={() => galleryStore.toggleFavorite(image.id)}>
+            <button className={styles.favoriteButton} onClick={() => galleryStore.toggleFavorite(image.id)}>
               {galleryStore.isFavorite(image.id) ? '❤️' : '🤍'}
             </button>
           )}
           {galleryStore.filterMode !== 'favorites' && (
-            <button className="dislike-button" onClick={() => galleryStore.toggleDislike(image.id)}>
+            <button className={styles.dislikeButton} onClick={() => galleryStore.toggleDislike(image.id)}>
               {galleryStore.isDisliked(image.id) ? 'X' : 'X'}
             </button>
           )}
