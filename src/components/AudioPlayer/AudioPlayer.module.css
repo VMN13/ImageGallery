@@ -1,5 +1,6 @@
 /* AudioPlayer.module.css */
 
+/* --- Основной контейнер плеера --- */
 .audioPlayerDark {
   display: flex;
   flex-direction: column;
@@ -7,9 +8,13 @@
   gap: 15px;
   padding: 20px;
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 10px 10px 400px 41px rgba(255, 111, 62, 0.75);
+  -webkit-box-shadow: 10px 10px 400px 41px rgba(255, 111, 62, 0.75);
+  -moz-box-shadow: 10px 10px 400px 41px rgba(255, 111, 62, 0.75);
+  animation: flicker 4s infinite;
   margin-top: 20px;
 }
 
@@ -20,12 +25,14 @@
   gap: 15px;
   padding: 20px;
   border-radius: 20px;
-  background-color: rgba(255, 255, 255);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
   margin-top: 20px;
 }
 
+/* --- Кнопки выбора звука --- */
 .soundButtons {
   display: flex;
   flex-wrap: wrap;
@@ -33,32 +40,36 @@
   gap: 10px;
 }
 
-.soundButton,
-.controlButton {
-  background: rgba(255, 255, 255, 0.8);
-  border: none;
+.soundButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
   padding: 10px 15px;
   font-size: 16px;
   cursor: pointer;
   opacity: 0.7;
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-.soundButton:hover,
-.controlButton:hover {
-  background: rgba(255, 255, 255, 0.9);
+.soundButton:hover {
+  background: rgba(255, 255, 255, 0.2);
   opacity: 1;
   transform: translateY(-2px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
-.soundButtonDark,
-.controlButtonDark {
-  background: rgba(0, 0, 0, 0.8);
+.soundButtonDark {
   color: rgb(255, 255, 255);
+}
+
+.soundButtonLight {
+  color: rgb(0, 0, 0);
 }
 
 .soundButtonActive {
@@ -67,82 +78,134 @@
   border: 2px solid #007bff;
 }
 
+/* --- Основные элементы управления (Play/Pause/Stop) --- */
 .controls {
   display: flex;
   gap: 15px;
 }
 
 .controlButton {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  font-size: 24px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
+.controlButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+  transform: scale(1.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.controlButtonDark {
+  color: rgb(255, 255, 255);
+}
+
+.controlButtonLight {
+  color: rgb(0, 0, 0);
+}
+
+/* --- Таймер и полоса прокрутки --- */
 .timerDisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 5px;
   font-size: 18px;
   font-family: monospace;
-  color: #333;
-  opacity: 0.8;
 }
 
 .timerDisplayDark {
   color: #f0f0f0;
 }
 
+.timerDisplayLight {
+  color: #333;
+}
+
 .seekBar {
   width: 100%;
   height: 5px;
-  background: #ddd;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .seekBarDark {
   background: #555;
+  color: white;
 }
 
+.seekBarLight {
+  background: #ddd;
+  color: black;
+}
+
+/* --- Контрол громкости --- */
 .volumeControl {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
   margin-top: 10px;
+  width: 100%;
 }
 
 .volumeControl label {
   font-size: 14px;
-  color: #333;
 }
 
 .volumeControlDark label {
   color: #f0f0f0;
 }
 
+.volumeControlLight label {
+  color: #333;
+}
+
 .volumeBar {
   width: 80%;
   height: 5px;
-  background: #ddd;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .volumeBarDark {
   background: #555;
+  color: white;
 }
 
+.volumeBarLight {
+  background: #ddd;
+  color: black;
+}
+
+/* --- Плавающий плеер --- */
 .floatingPlayer {
   position: fixed;
   top: 0;
-  right: 20px;
-  width: 250px;
+ 
+  width: 100%;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1000;
@@ -155,8 +218,13 @@
 }
 
 .floatingPlayerDark {
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: rgba(0, 0, 0, 0.5);
   color: white;
+}
+
+.floatingPlayerLight {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
 }
 
 .floatingPlayerMinimized {
@@ -165,6 +233,8 @@
   padding: 5px;
   flex-direction: row;
   justify-content: center;
+  left: auto;
+  right: 20px;
 }
 
 .floatingPlayerDragging {
@@ -172,10 +242,9 @@
   user-select: none;
 }
 
-.closeButton {
+.closeButton, .minimizeButton {
   position: absolute;
   top: 5px;
-  right: 5px;
   background: none;
   border: none;
   font-size: 16px;
@@ -184,32 +253,19 @@
   transition: color 0.2s;
 }
 
-.closeButton:hover {
-  color: #000;
-}
-
-.floatingPlayerDark .closeButton:hover {
-  color: #fff;
+.closeButton {
+  right: 5px;
 }
 
 .minimizeButton {
-  position: absolute;
-  top: 5px;
   left: 5px;
-  background: none;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-  color: #888;
-  transition: color 0.2
 }
 
-/* Продолжение AudioPlayer.module.css */
-
-.minimizeButton:hover {
+.closeButton:hover, .minimizeButton:hover {
   color: #000;
 }
 
+.floatingPlayerDark .closeButton:hover,
 .floatingPlayerDark .minimizeButton:hover {
   color: #fff;
 }
@@ -220,17 +276,22 @@
 }
 
 .floatingControlButton {
-  background: none;
-  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
   font-size: 20px;
   cursor: pointer;
   padding: 5px;
-  border-radius: 5px;
-  transition: background 0.2s;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
 .floatingControlButton:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 .floatingPlayerDark .floatingControlButton:hover {
@@ -253,14 +314,20 @@
 .floatingSeekBar {
   width: 100%;
   height: 5px;
-  background: #ddd;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .floatingPlayerDark .floatingSeekBar {
   background: #555;
+  color: white;
+}
+
+.floatingPlayerLight .floatingSeekBar {
+  background: #ddd;
+  color: black;
 }
 
 .floatingVolume {
@@ -273,22 +340,74 @@
 .floatingVolumeBar {
   width: 80%;
   height: 5px;
-  background: #ddd;
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+  -webkit-appearance: none;
 }
 
 .floatingPlayerDark .floatingVolumeBar {
   background: #555;
+  color: white;
+}
+
+.floatingPlayerLight .floatingVolumeBar {
+  background: #ddd;
+  color: black;
 }
 
 .floatingControlButtonMinimizedPlay {
   font-size: 24px;
   margin: auto;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 }
 
-/* Адаптивность для планшетов и мобильных */
+.floatingControlButtonMinimizedPlay:hover {
+  transform: scale(1.05);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* --- Стили для ползунков (seek и volume) --- */
+/* Для Webkit (Chrome, Safari) */
+.seekBar::-webkit-slider-thumb,
+.volumeBar::-webkit-slider-thumb,
+.floatingSeekBar::-webkit-slider-thumb,
+.floatingVolumeBar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: currentColor;
+  cursor: pointer;
+}
+
+/* Для Firefox */
+.seekBar::-moz-range-thumb,
+.volumeBar::-moz-range-thumb,
+.floatingSeekBar::-moz-range-thumb,
+.floatingVolumeBar::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: currentColor;
+  cursor: pointer;
+  border: none;
+}
+
+/* --- Адаптивность для планшетов и мобильных --- */
 @media screen and (max-width: 768px) {
   .audioPlayerDark,
   .audioPlayerLight {
@@ -307,23 +426,46 @@
     font-size: 20px;
   }
 
-  .timerDisplay,
-  .timerDisplayDark {
+  .timerDisplay {
     font-size: 16px;
   }
 
   .floatingPlayer {
-    width: calc(100vw - 20px);
-    top: 0;
-    right: 10px;
-    left: 10px;
+    width: 100%;
+   
+  
   }
 
   .floatingPlayerMinimized {
-    width: 50px;
+   width: 100px;
     height: 50px;
-    top: 0;
     right: 10px;
-    left: auto;
+  }
+}
+
+/* --- Анимации из вашего примера --- */
+@keyframes flicker {
+  0%, 100% {
+    box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+    -webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+    -moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.75);
+  }
+  50% {
+    box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.3);
+    -webkit-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.3);
+    -moz-box-shadow: 10px 10px 400px 41px rgba(255,111,62,0.3);
+  }
+}
+
+@keyframes blue {
+  0%, 100% {
+    box-shadow: 10px 10px 400px 41px rgba(62, 181, 255, 0.75);
+    -webkit-box-shadow: 10px 10px 400px 41px rgba(62, 255, 255, 0.75);
+    -moz-box-shadow: 10px 10px 400px 41px rgba(62, 255, 229, 0.75);
+  }
+  50% {
+    box-shadow: 10px 10px 400px 41px rgba(62, 252, 255, 0.3);
+    -webkit-box-shadow: 10px 10px 400px 41px rgba(62, 255, 249, 0.3);
+    -moz-box-shadow: 10px 10px 400px 41px rgba(62, 255, 187, 0.3);
   }
 }

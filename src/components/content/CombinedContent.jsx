@@ -7,7 +7,7 @@ import Preload from "../Preload/Preload";
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import GalleryControls from "../GalleryControls/GalleryControls";
 import GalleryGrid from "../GalleryGrid/GalleryGrid";
-import "../../styles/Content.css";
+import styles from "./CombinedContent.module.css"; // Добавлен импорт модуля
 
 const CombinedContent = observer(() => {
   const [modalImage, setModalImage] = useState(null);
@@ -21,17 +21,12 @@ const CombinedContent = observer(() => {
   const user = true; // Предполагаем, что это будет заменено на реальный тип из аутентификации
   const { isDarkMode } = useTheme();
 
-
-
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsPreloading(false);
     }, 3000);
     return () => clearTimeout(timer);
   }, []);
-
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -112,8 +107,8 @@ const CombinedContent = observer(() => {
 
   return (
     <>
-      {nightMode && <div className="night-overlay"></div>}
-      <div className={`Margin ${isDarkMode ? 'dark' : 'light'}`}>
+      {nightMode && <div className="night-overlay"></div>} {/* Оставлено как глобальный класс */}
+      <div className={`${styles.Margin} ${isDarkMode ? styles.dark : styles.light}`}>
         <GalleryControls />
         <GalleryGrid 
           nightMode={nightMode}

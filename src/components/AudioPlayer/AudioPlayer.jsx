@@ -23,6 +23,25 @@ const soundNames = {
   veter: 'Ветер'
 };
 
+// SVG иконки для управления
+const PlayIcon = () => (
+  <svg className={styles.controlIcon} width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M8 5v14l11-7z"/>
+  </svg>
+);
+
+const PauseIcon = () => (
+  <svg className={styles.controlIcon} width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+  </svg>
+);
+
+const StopIcon = () => (
+  <svg className={styles.controlIcon} width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M6 6h12v12H6z"/>
+  </svg>
+);
+
 const AudioPlayer = () => {
   const { isDarkMode } = useTheme();
   const audioRef = useRef(null);
@@ -239,10 +258,10 @@ const AudioPlayer = () => {
 
         <div className={styles.controls}>
           <button className={`${styles.controlButton} ${isDarkMode ? styles.controlButtonDark : styles.controlButtonLight}`} onClick={isPlaying ? handlePause : () => handlePlay(currentSound || 'sea')}>
-            {isPlaying ? '⏸️' : '▶️'}
+            {isPlaying ? <PauseIcon /> : <PlayIcon />}
           </button>
           <button className={`${styles.controlButton} ${isDarkMode ? styles.controlButtonDark : styles.controlButtonLight}`} onClick={handleStop}>
-            ⏹️
+            <StopIcon />
           </button>
         </div>
 
@@ -289,10 +308,10 @@ const AudioPlayer = () => {
               <div className={styles.floatingControls}>
                 <button className={styles.floatingControlButton} onClick={handlePrev}>◀</button>
                 <button className={styles.floatingControlButton} onClick={isPlaying ? handlePause : () => handlePlay(currentSound)}>
-                  {isPlaying ? '⏸️' : '▶️'}
+                  {isPlaying ? <PauseIcon /> : <PlayIcon />}
                 </button>
                 <button className={styles.floatingControlButton} onClick={handleStop}>
-                  ⏹️
+                  <StopIcon />
                 </button>
                 <button className={styles.floatingControlButton} onClick={handleNext}>▶</button>
               </div>
@@ -323,7 +342,7 @@ const AudioPlayer = () => {
           )}
           {isMinimized && (
             <button className={styles.floatingControlButtonMinimizedPlay} onClick={isPlaying ? handlePause : () => handlePlay(currentSound)}>
-              {isPlaying ? '⏸️' : '▶️'}
+              {isPlaying ? <PauseIcon /> : <PlayIcon />}
             </button>
           )}
         </div>,
