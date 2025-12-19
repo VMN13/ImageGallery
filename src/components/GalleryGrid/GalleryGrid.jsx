@@ -3,41 +3,47 @@ import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import Pagination from "../Pagination/Pagination";
 import ImageItem from "../ImageItem/ImageItem";
-import NightModeButton from "../NightModeButton/NightModeButton";
-import { useTheme } from "../ThemeContext";
+// NightModeButton больше не нужен здесь, если управление темой вынесено в глобальный контекст
+// import NightModeButton from "../NightModeButton/NightModeButton"; 
+import { useTheme } from "../../../src/components/ThemeContext"; // <-- 1. Исправленный импорт
+import styles from "./GalleryGrid.module.css";
 
-const GalleryGrid = observer(({ nightMode, setNightMode, onOpenModal, onPageChange }) => {
+// 2. Убрали лишние пропсы nightMode, setNightMode
+const GalleryGrid = observer(({ onOpenModal, onPageChange }) => {
   const { isDarkMode } = useTheme();
   const [isSelectFocused, setIsSelectFocused] = useState(false);
   const isZoomed = galleryStore.zoomLevel === 'zoomed';
 
   return (
-    <div className={`Content ${isDarkMode ? 'dark' : 'light'}`}>
+    <div className={`${styles.Content} ${isDarkMode ? styles.ContentDark : styles.ContentLight}`}> 
       <Pagination currentPage={galleryStore.currentPage} totalPages={galleryStore.totalPages} onPageChange={onPageChange} />
       
-      <div className={`Main ${isDarkMode ? 'dark' : 'light'}`}>
-        <div className="ALL_OR_MODE">
-        <NightModeButton nightMode={nightMode} setNightMode={setNightMode} />
-          <div className="search">
-          <select  
-            id={`select ${isDarkMode ? 'dark' : 'light'}`}
-            value={galleryStore.currentSection}
-            style={{ backgroundColor: isDarkMode ?  '#333' : '#fff', color: isDarkMode ?  '#fff' : '#333 ', border: 'none'     }}
-            onChange={(e) => galleryStore.setCurrentSection(e.target.value)}
-            onFocus={() => setIsSelectFocused(true)}
-          >
-            <option value="all">Все разделы</option>
-            <option value="nature">Природа</option>
-            <option value="cities">Города</option>
-            <option value="animals">Животные</option>
-            <option value="tech">Технологии</option>
-            <option value="food">Еда</option>
-          </select>
+      <div className={`${styles.Main} ${isDarkMode ? styles.MainDark : styles.MainLight}`}> 
+        <div className={styles.ALL_OR_MODE}> 
+          {/* Если NightModeButton управляет темой через контекст, его можно оставить здесь */}
+          {/* <NightModeButton /> */}
+          <div className={styles.search}> 
+            <select  
+              // 3. Исправлен id
+              id={`select-${isDarkMode ? 'dark' : 'light'}`}
+              value={galleryStore.currentSection}
+              // 4. Убраны инлайн-стили, предполагая, что они есть в CSS-модуле
+              onChange={(e) => galleryStore.setCurrentSection(e.target.value)}
+              onFocus={() => setIsSelectFocused(true)}
+              className={`${styles.select} ${isDarkMode ? styles.selectDark : styles.selectLight}`} 
+            >
+              <option value="all">Все разделы</option>
+              <option value="nature">Природа</option>
+              <option value="cities">Города</option>
+              <option value="animals">Животные</option>
+              <option value="tech">Технологии</option>
+              <option value="food">Еда</option>
+            </select>
+          </div>
         </div>
-        </div>
+
         {galleryStore.filterMode === 'favorites' && (
           <div>
-            <div className="d"></div>
             <h2>Избранные</h2>
             <button onClick={() => galleryStore.clearFavorites()}>Сбросить избранные</button>
           </div>
@@ -48,26 +54,30 @@ const GalleryGrid = observer(({ nightMode, setNightMode, onOpenModal, onPageChan
             <button onClick={() => galleryStore.clearDislikes()}>Сбросить дизлайки</button>
           </div>
         )}
-        {galleryStore.currentImages.length > 0 ? (
-          galleryStore.currentImages.map((image) => (
-            <ImageItem 
-              key={image.id} 
-              image={image} 
-              onOpenModal={onOpenModal} 
-              isZoomed={isZoomed}
-            />
-          ))
-        ) : (
-          <div className="NotFound">
-            <p>Изображения не найдены. Попробуйте другой запрос.</p>
-          </div>
-        )}
+
+        <div className={`${styles.ImageGrid} ${isZoomed ? styles.zoomed : ''}`}>
+          {galleryStore.currentImages.length > 0 ? (
+            galleryStore.currentImages.map((image) => (
+              <ImageItem 
+                key={image.id} 
+                image={image} 
+                onOpenModal={onOpenModal} 
+                isZoomed={isZoomed}
+              />
+            ))
+          ) : (
+            <div className={`${styles.NotFound} ${isDarkMode ? styles.NotFoundDark : ''}`}>
+              <p>Изображения не найдены. Попробуйте другой запрос.</p>
+            </div>
+          )}
+        </div>
       </div>
+      
       <Pagination currentPage={galleryStore.currentPage} totalPages={galleryStore.totalPages} onPageChange={onPageChange} />
-      <div className="page-info">
+      <div className={styles.pageInfo}>
         <p>Страница {galleryStore.currentPage} из {galleryStore.totalPages} (Найдено: {galleryStore.filteredImages.length})</p>
       </div>
-      <div className="getSectionTitle">{galleryStore.getSectionTitle()}</div>
+      <div className={styles.getSectionTitle}>{galleryStore.getSectionTitle()}</div>
     </div>
   );
 });

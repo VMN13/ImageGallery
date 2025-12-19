@@ -1,28 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import LazyImage from "../../components/LazyImage/LazyImage";
-import styles from "./ImageItem.module.css"; // Импорт модуля
+import styles from "./ImageItem.module.css";
+import { useIntersectionObserver } from "../../hooks/useIntersectionObserver"; // Импорт хука
 
 const ImageItem = observer(({ image, onOpenModal }) => {
   const [showActionButtons, setShowActionButtons] = useState(false);
   const [actionTimeout, setActionTimeout] = useState(null);
 
-  const toggleActionButtons = () => {
+  // 1. Используем хук для отслеживания видимости элемента
+  const [elementRef, isVisible] = useIntersectionObserver();
+
+  // 2. Улучшенная логика для кнопок с очисткой таймера через useEffect
+  useEffect(() => {
     if (showActionButtons) {
-      setShowActionButtons(false);
-      if (actionTimeout) {
-        clearTimeout(actionTimeout);
-        setActionTimeout(null);
-      }
-    } else {
-      setShowActionButtons(true);
       const timeoutId = setTimeout(() => {
         setShowActionButtons(false);
-        setActionTimeout(null);
       }, 5000);
       setActionTimeout(timeoutId);
+    } else {
+      if (actionTimeout) {
+        clearTimeout(actionTimeout);
+      }
     }
+    // Функция очистки для useEffect
+    return () => {
+      if (actionTimeout) {
+        clearTimeout(actionTimeout);
+      }
+    };
+  }, [showActionButtons, actionTimeout]);
+
+  const toggleActionButtons = () => {
+    setShowActionButtons(!showActionButtons);
   };
 
   const copyImageUrl = async (url) => {
@@ -40,7 +51,8 @@ const ImageItem = observer(({ image, onOpenModal }) => {
       try {
         await navigator.share({ title: 'Изображение из галереи', text: `Посмотри на изображение "${alt}" в галерее!`, url: url });
       } catch (err) {
-        alert('Не удалось поделиться. Попробуйте вручную.');
+        // Пользователь мог отменить действие, это не ошибка
+        console.log('Шаринг отменен');
       }
     } else {
       const subject = encodeURIComponent('Изображение из галереи');
@@ -58,18 +70,22 @@ const ImageItem = observer(({ image, onOpenModal }) => {
   const isZoomed = galleryStore.getZoomLevelForImage(image.id) === 'zoomed';
 
   return (
-    <div className={styles.firstBlock}> {/* Обновлено */}
-      <div className={`${styles.internalContent} ${isZoomed ? styles.internalContentZoomed : ''}`}> {/* Обновлено */}
+    // 3. Добавляем ref и динамический класс для анимации появления
+    <div 
+      ref={elementRef}
+      className={`${styles.firstBlock} ${isVisible ? styles.isVisible : ''}`}
+    >
+      <div className={`${styles.internalContent} ${isZoomed ? styles.internalContentZoomed : ''}`}>
         <LazyImage 
           src={image.url} 
           alt={image.alt}
-          className={`fade-in ${isZoomed ? 'zoomed' : ''}`} 
+          // 4. Убираем глобальный класс "fade-in", анимация теперь на контейнере
           onClick={() => onOpenModal(image)} 
         />
-        <div className={styles.buttonsContainer}> {/* Обновлено */}
+        <div className={styles.buttonsContainer}>
           <button className={styles.actionButtonExpanded} onClick={toggleActionButtons}>➦
             {showActionButtons && (
-              <div className={styles.actionButtonsExpanded}> {/* Добавлено, если нужно */}
+              <div className={styles.actionButtonsExpanded}>
                 <button className={styles.copyButton} onClick={() => copyImageUrl(image.url)}>Copy!</button>
                 <button className={styles.shareButton} onClick={() => shareImageUrl(image.url, image.alt)}>Share!</button>
               </div>

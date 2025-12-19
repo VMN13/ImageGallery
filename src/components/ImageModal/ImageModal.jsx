@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { useTheme } from '../ThemeContext';
 import styles from './ImageModal.module.css';
 
+
+
 const ImageModal = ({ isOpen, onClose, image, shareImageUrl }) => {
   const { isDarkMode } = useTheme();
   const modalRef = useRef(null);

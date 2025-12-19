@@ -75,7 +75,7 @@
 .soundButtonActive {
   opacity: 1;
   font-weight: bold;
-  border: 2px solid #007bff;
+  border: 2px solid #1c1c1c;
 }
 
 /* --- Основные элементы управления (Play/Pause/Stop) --- */

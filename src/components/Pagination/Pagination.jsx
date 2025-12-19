@@ -1,6 +1,6 @@
 import React from "react";
-import { useTheme } from "../ThemeContext"; // Добавлен импорт
-import styles from "./Pagination.module.css"; // Предполагая, что вы создадите модуль на основе CSS
+import { useTheme } from "../ThemeContext";
+import '../../styles/Content.css';
 
 const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const { isDarkMode } = useTheme();
@@ -47,9 +47,9 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
   const pageNumbers = getPageNumbers();
 
   return (
-    <div className={styles.Pagination}>
+    <div className='Pagination'>
       <button 
-        className={`${styles.PaginationButton} ${isDarkMode ? styles.dark : styles.light}`} 
+        className={`Pagination-button ${isDarkMode ? 'dark' : 'light'}`} 
         onClick={goToPrevious} 
         disabled={currentPage === 1}
       >
@@ -59,7 +59,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       {pageNumbers.map((page, index) => {
         if (page === '...') {
           return (
-            <span key={`ellipsis-${index}`} className={styles.PaginationEllipsis}>
+            <span key={`ellipsis-${index}`} className="Pagination-ellipsis">
               ...
             </span>
           );
@@ -67,7 +67,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
         return (
           <button 
             key={page}
-            className={`${styles.PaginationButton} ${isDarkMode ? styles.dark : styles.light} ${(page) === currentPage ? 'active' : ''}`}
+            className={`Pagination-button ${isDarkMode ? 'dark' : 'light'} ${(page) === currentPage ? 'active' : ''}`}
             onClick={() => {
               console.log('Клик на страницу', page);
               onPageChange(page);
@@ -80,7 +80,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
       })}
 
       <button 
-        className={`${styles.PaginationButton} ${isDarkMode ? styles.dark : styles.light}`} 
+        className={`Pagination-button ${isDarkMode ? 'dark' : 'light'}`} 
         onClick={goToNext} 
         disabled={currentPage === totalPages}
       >
