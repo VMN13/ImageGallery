@@ -3,15 +3,11 @@ import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import Pagination from "../Pagination/Pagination";
 import ImageItem from "../ImageItem/ImageItem";
-// NightModeButton больше не нужен здесь, если управление темой вынесено в глобальный контекст
-// import NightModeButton from "../NightModeButton/NightModeButton"; 
-import { useTheme } from "../../../src/components/ThemeContext"; // <-- 1. Исправленный импорт
+import { useTheme } from "../../../src/components/ThemeContext";
 import styles from "./GalleryGrid.module.css";
 
-// 2. Убрали лишние пропсы nightMode, setNightMode
 const GalleryGrid = observer(({ onOpenModal, onPageChange }) => {
   const { isDarkMode } = useTheme();
-  const [isSelectFocused, setIsSelectFocused] = useState(false);
   const isZoomed = galleryStore.zoomLevel === 'zoomed';
 
   return (
@@ -19,42 +15,41 @@ const GalleryGrid = observer(({ onOpenModal, onPageChange }) => {
       <Pagination currentPage={galleryStore.currentPage} totalPages={galleryStore.totalPages} onPageChange={onPageChange} />
       
       <div className={`${styles.Main} ${isDarkMode ? styles.MainDark : styles.MainLight}`}> 
-        <div className={styles.ALL_OR_MODE}> 
-          {/* Если NightModeButton управляет темой через контекст, его можно оставить здесь */}
-          {/* <NightModeButton /> */}
-          <div className={styles.search}> 
-            <select  
-              // 3. Исправлен id
-              id={`select-${isDarkMode ? 'dark' : 'light'}`}
-              value={galleryStore.currentSection}
-              // 4. Убраны инлайн-стили, предполагая, что они есть в CSS-модуле
-              onChange={(e) => galleryStore.setCurrentSection(e.target.value)}
-              onFocus={() => setIsSelectFocused(true)}
-              className={`${styles.select} ${isDarkMode ? styles.selectDark : styles.selectLight}`} 
-            >
-              <option value="all">Все разделы</option>
-              <option value="nature">Природа</option>
-              <option value="cities">Города</option>
-              <option value="animals">Животные</option>
-              <option value="tech">Технологии</option>
-              <option value="food">Еда</option>
-            </select>
+        {/* Условие для скрытия select в разделе "user" остается без изменений */}
+        {galleryStore.currentSection !== 'user' && (
+          <div className={styles.ALL_OR_MODE}> 
+            <div className={styles.search}> 
+              <select  
+                id="section-select"
+                value={galleryStore.currentSection}
+                onChange={(e) => galleryStore.setCurrentSection(e.target.value)}
+                className={`${styles.select} ${isDarkMode ? styles.selectDark : styles.selectLight}`} 
+              >
+                <option value="all">Все разделы</option>
+                <option value="nature">Природа</option>
+                <option value="cities">Города</option>
+                <option value="animals">Животные</option>
+                <option value="tech">Технологии</option>
+                <option value="food">Еда</option>
+              </select>
+            </div>
           </div>
+        )}
+
+        {/* Контейнер теперь содержит только заголовки разделов */}
+        <div className={`${styles.sectionControlsWrapper} ${isDarkMode ? styles.sectionControlsWrapperDark : styles.sectionControlsWrapperLight}`}>
+          {galleryStore.filterMode === 'favorites' && galleryStore.favorites.length > 0 && (
+            <h2>Избранные</h2>
+          )}
+          {galleryStore.filterMode === 'dislikes' && galleryStore.dislikes.length > 0 && (
+            <h2>Ваши Дизлайки</h2>
+          )}
+          {galleryStore.currentSection === 'user' && galleryStore.userImages.length > 0 && (
+            <h2>Мои изображения</h2>
+          )}
         </div>
 
-        {galleryStore.filterMode === 'favorites' && (
-          <div>
-            <h2>Избранные</h2>
-            <button onClick={() => galleryStore.clearFavorites()}>Сбросить избранные</button>
-          </div>
-        )}
-        {galleryStore.filterMode === 'dislikes' && (
-          <div>
-            <h2>Дизлайки</h2>
-            <button onClick={() => galleryStore.clearDislikes()}>Сбросить дизлайки</button>
-          </div>
-        )}
-
+        {/* Сетка с изображениями */}
         <div className={`${styles.ImageGrid} ${isZoomed ? styles.zoomed : ''}`}>
           {galleryStore.currentImages.length > 0 ? (
             galleryStore.currentImages.map((image) => (
@@ -69,6 +64,34 @@ const GalleryGrid = observer(({ onOpenModal, onPageChange }) => {
             <div className={`${styles.NotFound} ${isDarkMode ? styles.NotFoundDark : ''}`}>
               <p>Изображения не найдены. Попробуйте другой запрос.</p>
             </div>
+          )}
+        </div>
+
+        {/* НОВЫЙ контейнер для кнопок очистки, идущий ПОСЛЕ сетки */}
+        <div className={styles.clearButtonsWrapper}>
+          {galleryStore.filterMode === 'favorites' && galleryStore.favorites.length > 0 && (
+            <button 
+              className={`${styles.clearButton} ${isDarkMode ? styles.FavoritesDark : styles.FavoritesLight}`}
+              onClick={() => galleryStore.clearFavorites()}
+            >
+              Сбросить избранные
+            </button>
+          )}
+          {galleryStore.filterMode === 'dislikes' && galleryStore.dislikes.length > 0 && (
+            <button 
+              className={`${styles.clearButton} ${isDarkMode ? styles.DislikesDark : styles.DislikesLight}`}
+              onClick={() => galleryStore.clearDislikes()}
+            >
+              Сбросить дизлайки
+            </button>
+          )}
+          {galleryStore.currentSection === 'user' && galleryStore.userImages.length > 0 && (
+            <button 
+              className={`${styles.clearButton} ${isDarkMode ? styles.UserImagesDark : styles.UserImagesLight}`}
+              onClick={() => galleryStore.clearUserImages()}
+            >
+              Очистить мои изображения
+            </button>
           )}
         </div>
       </div>

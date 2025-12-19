@@ -3,8 +3,9 @@ import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import PhotoCounter from "../PhotoCounter/PhotoCounter";
 import SearchComponent from "../SearchComponent/SearchComponent";
-import styles from "./GalleryControls.module.css"; // Импорт модуля
-import { useTheme } from "../ThemeContext"; // Добавлен импорт
+import ImageUploadComponent from "../../components/ImageUpload/ImageUploadComponent";
+import styles from "./GalleryControls.module.css";
+import { useTheme } from "../ThemeContext";
 
 const GalleryControls = observer(() => {
   const { isDarkMode } = useTheme();
@@ -29,12 +30,17 @@ const GalleryControls = observer(() => {
     galleryStore.setCurrentSection('all');
   };
 
+  const handleImageUpload = (imageData) => {
+    galleryStore.addUserImage(imageData);
+    galleryStore.setCurrentSection('user');
+  };
+
   return (
-    <div className={`${styles.controlsWrapper} ${isDarkMode ? styles.controlsWrapperDark : styles.controlsWrapperLight}`} ref={selectContainerRef}> {/* Обновлено */}
-      <div className={styles.centeredCounter}> {/* Добавлено, если нужно */}
+    <div className={`${styles.controlsWrapper} ${isDarkMode ? styles.controlsWrapperDark : styles.controlsWrapperLight}`} ref={selectContainerRef}>
+      <div className={styles.centeredCounter}>
         <PhotoCounter />
       </div>
-      <div className={styles.searchAndFilterContainer}> {/* Добавлено, если нужно */}
+      <div className={styles.searchAndFilterContainer}>
         <SearchComponent 
           searchTerm={galleryStore.searchTerm}
           setSearchTerm={galleryStore.setSearchTerm}
@@ -42,25 +48,60 @@ const GalleryControls = observer(() => {
           isDarkMode={isDarkMode}
         />
     
-        <div className={styles.buttonsFavorites}> {/* Обновлено */}
+        <div className={styles.buttonsFavorites}>
           <button
-            className={`${isDarkMode ? styles.AllDark : styles.AllLight} ${galleryStore.filterMode === 'all' ? 'active' : ''}`}
-            onClick={() => galleryStore.setFilterMode('all')}
+            className={`${isDarkMode ? styles.AllDark : styles.AllLight} ${galleryStore.currentSection === 'all' && galleryStore.filterMode === 'all' ? 'active' : ''}`}
+            onClick={() => {
+              galleryStore.setCurrentSection('all');
+              galleryStore.setFilterMode('all');
+            }}
           >
-            Все
+            Все фотографии
           </button>
+          
+          {/* --- ИСПРАВЛЕНА КНОПКА --- */}
           <button 
             className={`${isDarkMode ? styles.FavoritesDark : styles.FavoritesLight} ${galleryStore.filterMode === 'favorites' ? 'active' : ''}`} 
-            onClick={() => galleryStore.setFilterMode(galleryStore.filterMode === 'favorites' ? 'all' : 'favorites')}
+            onClick={() => {
+              const newFilterMode = galleryStore.filterMode === 'favorites' ? 'all' : 'favorites';
+              galleryStore.setFilterMode(newFilterMode);
+              // Важно: сбрасываем раздел, чтобы скрыть элементы из "Моих изображений"
+              galleryStore.setCurrentSection('all'); 
+            }}
           >
-            {galleryStore.filterMode === 'favorites' ? 'Показать все' : 'Избранные'}
+            {galleryStore.filterMode === 'favorites' ? 'Показать все' : 'Ваши Избранные'}
           </button> 
+
+          {/* --- ИСПРАВЛЕНА КНОПКА --- */}
           <button 
             className={`${isDarkMode ? styles.DislikesDark : styles.DislikesLight} ${galleryStore.filterMode === 'dislikes' ? 'active' : ''}`} 
-            onClick={() => galleryStore.setFilterMode(galleryStore.filterMode === 'dislikes' ? 'all' : 'dislikes')}
+            onClick={() => {
+              const newFilterMode = galleryStore.filterMode === 'dislikes' ? 'all' : 'dislikes';
+              galleryStore.setFilterMode(newFilterMode);
+              // Важно: сбрасываем раздел, чтобы скрыть элементы из "Моих изображений"
+              galleryStore.setCurrentSection('all');
+            }}
           >
-            {galleryStore.filterMode === 'dislikes' ? 'Показать все' : 'Дизы'}
+            {galleryStore.filterMode === 'dislikes' ? 'Показать все' : 'Ваши дизлайки'}
           </button>
+
+          <button 
+            className={`${isDarkMode ? styles.AllDark : styles.AllLight} ${galleryStore.currentSection === 'user' ? 'active' : ''}`} 
+            onClick={() => {
+              galleryStore.setCurrentSection('user');
+              galleryStore.setFilterMode('all');
+            }}
+          >
+            Мои изображения
+          </button>
+          
+          {/* Этот компонент теперь будет отображаться корректно */}
+          {galleryStore.currentSection === 'user' && (
+            <ImageUploadComponent 
+              onImageUpload={handleImageUpload} 
+              isDarkMode={isDarkMode}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -1,86 +1,168 @@
+/* --- СТИЛИ ДЛЯ ЗАГОЛОВКОВ РАЗДЕЛОВ (упрощены) --- */
+.sectionControlsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+  padding: 15px;
+  border-radius: 20px;
+  width: 80%;
+  max-width: 500px;
+}
+
+.sectionControlsWrapperLight {
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sectionControlsWrapperDark {
+  background-color: rgba(0, 0, 0, 0.3);
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.sectionControlsWrapper h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* --- СТИЛИ ДЛЯ КНОПОК ОЧИСТКИ (ВНИЗУ) --- */
+
+/* Контейнер для кнопок очистки */
+.clearButtonsWrapper {
+  display: flex;
+  justify-content: center; /* Центрируем кнопку по горизонтали */
+  margin-top: 2rem; /* Добавляем пространство над кнопкой */
+  padding: 0 10px;
+}
+
+/* Стили для кнопок очистки */
+.clearButton {
+  border-radius: 5px;
+  height: 40px;
+  padding: 0 15px;
+  transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 200px; /* Минимальная ширина для лучшего вида */
+}
+
+.clearButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.clearButton:active {
+  transform: scale(0.95);
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* --- Цветовые схемы для кнопок --- */
+
+/* Светлая тема */
+.FavoritesLight {
+  background-color: #ff9800; /* Оранжевый */
+  color: white;
+}
+
+.DislikesLight {
+  background-color: #f44336; /* Красный */
+  color: white;
+}
+
+.UserImagesLight {
+  background-color: #9c27b0; /* Фиолетовый */
+  color: white;
+}
+
+/* Темная тема */
+.FavoritesDark {
+  background-color: #e65100; /* Темно-оранжевый */
+  color: white;
+}
+
+.DislikesDark {
+  background-color: #c62828; /* Темно-красный */
+  color: white;
+}
+
+.UserImagesDark {
+  background-color: #7b1fa2; /* Темно-фиолетовый */
+  color: white;
+}
+
+/* Адаптивность для мобильных устройств */
 @media screen and (max-width: 768px) {
-  .ContentDark {
-    /* Стили для .Content.dark */
-  }
-
-  .ContentLight {
-    /* Стили для .Content.light */
-  }
-
-  .MainDark {
-    /* Стили для .Main.dark (уже в CombinedContent, но если нужно дублировать) */
-  }
-
-  .MainLight {
-    /* Стили для .Main.light */
-  }
-
-  .ALL_OR_MODE {
-    display: flex;
-    justify-content: row;
-  }
-
-  .search {
-    display: flex;
+  .clearButtonsWrapper {
     width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    padding: 20px;
   }
+  
+  .clearButton {
+    width: 100%; /* Растягиваем кнопку на всю ширину на маленьких экранах */
+  }
+}
 
-  .selectLight {
-    display: flex;
-    flex-direction: row;
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-    margin: auto;
-    cursor: pointer;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    background-color: rgb(203, 203, 203);
-    transition: 1s ease-in-out;
-  }
+/* --- СТИЛИ ДЛЯ SELECT (остаются без изменений) --- */
+.selectWrapper {
+  position: relative;
+  width: 100%;
+  max-width: 250px;
+}
 
-  .selectDark {
-    border: 1px solid #555;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    color: white;
-    transition: 1s ease-in-out;
-  }
+.selectWrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  border-style: solid;
+  border-width: 6px 5px 0 5px;
+  border-color: #555 transparent transparent transparent;
+}
 
-  .NotFound {
-    text-align: center;
-    color: rgb(0, 0, 0);
-  }
+.selectWrapperLight::after {
+  border-color: #333 transparent transparent transparent;
+}
 
-  .NotFoundDark {
-    color: rgb(255, 255, 255);
-  }
+.selectWrapperDark::after {
+  border-color: #ccc transparent transparent transparent;
+}
 
-  .pageInfo {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
+.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: 10px 35px 10px 15px;
+  font-size: 16px;
+  font-family: inherit;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
 
-  .section {
-    display: flex;
-    flex-direction: column;
-  }
+.selectWrapperLight .select {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .getSectionTitle {
-    display: flex;
-    font-size: 24px;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-weight: bold;
-    justify-content: center;
-  }
+.selectWrapperDark .select {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }

@@ -161,37 +161,9 @@
     transition: 1s ease-in-out;
   }
 
-  /* --- Стили для селекта (выпадающего списка) --- */
 
-#select.light{
-   display: flex;
-    flex-direction: row;
-    padding: 10px;
-    font-size: 16px;
-     width: 100%;
-      margin: auto;
-      cursor: pointer;
-}
 
-  #select.light {
-    border: 1px solid #000000;
-    border-radius: 10px;
-    background-color: rgb(203, 203, 203);
-    transition: 1s ease-in-out;
-  }
 
-  #select.dark {
-    border: 1px solid #555;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    cursor: pointer;
-    color: white;
-    transition: 1s ease-in-out;
-  }
-
-  /* --- Стили для ночного режима и оверлея --- */
-
- 
 
   .night-mode-button {
     background-color: #0d0d0d;
@@ -789,9 +761,7 @@
 }
 /* Специфические стили для zoomed (если нужно переопределить) */
   
-#select.dark {
-  background-color: rgba(255, 0.05);
-}
+
 
 
 
