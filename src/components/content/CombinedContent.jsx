@@ -3,30 +3,24 @@ import { observer } from "mobx-react-lite";
 import galleryStore from "../../stores/GalleryStore";
 import { useTheme } from "../ThemeContext";
 import ImageModal from "../ImageModal/ImageModal";
-import Preload from "../Preload/Preload";
+// Убираем импорт Preload
 import AudioPlayer from "../AudioPlayer/AudioPlayer";
 import GalleryControls from "../GalleryControls/GalleryControls";
 import GalleryGrid from "../GalleryGrid/GalleryGrid";
-import styles from "./CombinedContent.module.css"; // Добавлен импорт модуля
+import styles from "./CombinedContent.module.css";
 
-const CombinedContent = observer(() => {
+const CombinedContent = observer(({ user }) => { // user передаем из App.js
   const [modalImage, setModalImage] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSelectFocused, setIsSelectFocused] = useState(false);
   const selectContainerRef = useRef(null);
   const [nightMode, setNightMode] = useState(false);
-  const [isPreloading, setIsPreloading] = useState(true);
+  // Убираем состояние isPreloading
   const [showActionButtons, setShowActionButtons] = useState({});
   const [actionTimeouts, setActionTimeouts] = useState({});
-  const user = true; // Предполагаем, что это будет заменено на реальный тип из аутентификации
   const { isDarkMode } = useTheme();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsPreloading(false);
-    }, 3000);
-    return () => clearTimeout(timer);
-  }, []);
+  // Убираем useEffect для прелоадера
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -75,7 +69,7 @@ const CombinedContent = observer(() => {
     setIsModalOpen(false);
   };
 
-  if (!user) return <p>Пожалуйста, войдите в систему.</p>;
+
 
   const copyImageUrl = async (url) => {
     try {
@@ -101,13 +95,11 @@ const CombinedContent = observer(() => {
     }
   };
 
-  if (isPreloading) {
-    return <Preload />;
-  }
+  // Убираем условие рендера прелоадера
 
   return (
     <>
-      {nightMode && <div className="night-overlay"></div>} {/* Оставлено как глобальный класс */}
+      {nightMode && <div className="night-overlay"></div>}
       <div className={`${styles.Margin} ${isDarkMode ? styles.dark : styles.light}`}>
         <GalleryControls />
         <GalleryGrid 

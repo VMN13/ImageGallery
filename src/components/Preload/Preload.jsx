@@ -1,12 +1,11 @@
 import React from "react";
-import "./Preload.css"; // Убедитесь, что путь корректен (например, если файл в той же папке)
+import styles from "./Preload.module.css"; // Используем CSS Modules
 
 const Preload = () => {
-  console.log("Preload component rendered"); // Отладка: проверьте консоль, должен появиться лог
   return (
-    <div className="preload">
-      <div className="preload-content">
-        <h1 className="preload-text">IMAGE GALLERY</h1>
+    <div className={styles.preload}>
+      <div className={styles.preloadContent}>
+        <h1 className={styles.preloadText}>ImageGallery!</h1>
       </div>
     </div>
   );
